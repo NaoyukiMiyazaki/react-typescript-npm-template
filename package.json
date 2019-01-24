@@ -1,0 +1,55 @@
+{
+  "name": "react-typescript-npm-template",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": "https://github.com/NaoyukiMiyazaki/react-typescript-npm-template.git",
+  "author": "Naoyuki Miyazaki",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run clean:demo && parcel demo/src/index.html -d demo/dist --open",
+    "build": "run-p build:*",
+    "build:lib": "npm run clean:lib && tsc",
+    "build:demo": "npm run clean:demo && parcel build demo/src/index.html -d demo/dist",
+    "format": "prettier --parser typescript --write \"src/**/*.ts\" --loglevel silent",
+    "clean": "run-p clean:*",
+    "clean:lib": "rimraf lib",
+    "clean:demo": "rimraf demo/dist",
+    "test": "jest",
+    "prepublishOnly": "npm run build:lib",
+    "predeploy": "npm run build:demo",
+    "deploy": "gh-pages -d demo/dist"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": ["npm run format", "git add"]
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "@types/react": "^16.7.20",
+    "@types/react-dom": "^16.0.11",
+    "gh-pages": "^2.0.1",
+    "husky": "^1.3.1",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.11.0",
+    "prettier": "^1.16.1",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.4"
+  },
+  "peerDependencies": {
+    "react": "^16.7.0"
+  }
+}
